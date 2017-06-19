@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="FSd-iy-y1N">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CKSlideMenu" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbP-rF-nYM">
+                                <rect key="frame" x="77.5" y="219" width="65" height="30"/>
+                                <state key="normal" title="Example1"/>
+                                <connections>
+                                    <action selector="example1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i3Q-LW-ayk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbP-Ev-RZ9">
+                                <rect key="frame" x="176.5" y="219" width="67" height="30"/>
+                                <state key="normal" title="Example2"/>
+                                <connections>
+                                    <action selector="example2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OQY-CR-X90"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ct-Fd-JXZ">
+                                <rect key="frame" x="75.5" y="319" width="68" height="30"/>
+                                <state key="normal" title="Example3"/>
+                                <connections>
+                                    <action selector="example3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BIy-bv-ZCQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61m-qe-ZC8">
+                                <rect key="frame" x="175.5" y="319" width="68" height="30"/>
+                                <state key="normal" title="Example4"/>
+                                <connections>
+                                    <action selector="example4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uKw-FH-Fce"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="61m-qe-ZC8" firstAttribute="centerX" secondItem="AbP-Ev-RZ9" secondAttribute="centerX" id="1Jb-vb-KHF"/>
+                            <constraint firstItem="AbP-Ev-RZ9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="50" id="G7H-5k-BLl"/>
+                            <constraint firstItem="KbP-rF-nYM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-50" id="Iqg-fV-frZ"/>
+                            <constraint firstItem="AbP-Ev-RZ9" firstAttribute="centerY" secondItem="KbP-rF-nYM" secondAttribute="centerY" id="OSf-oR-dIQ"/>
+                            <constraint firstItem="2ct-Fd-JXZ" firstAttribute="centerX" secondItem="KbP-rF-nYM" secondAttribute="centerX" id="TR2-d9-WFZ"/>
+                            <constraint firstItem="2ct-Fd-JXZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="50" id="UlV-tw-18b"/>
+                            <constraint firstItem="KbP-rF-nYM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-50" id="Zm9-JL-ang"/>
+                            <constraint firstItem="61m-qe-ZC8" firstAttribute="centerY" secondItem="2ct-Fd-JXZ" secondAttribute="centerY" id="fH2-U7-Kkj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="WVf-0M-vfR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4" y="-493"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="W3w-aV-cxy">
+            <objects>
+                <navigationController id="FSd-iy-y1N" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="maJ-uK-SX0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="YeA-rT-5aj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="13n-1N-LSu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-938" y="-493"/>
+        </scene>
+    </scenes>
+</document>
