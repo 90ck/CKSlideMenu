@@ -355,10 +355,12 @@ extension CKSlideMenu: UIScrollViewDelegate {
         if scrollView == self.bodyScrollView {
             let offset = scrollView.contentOffset
             if offset.x <= 0 {
+                // 左边界
                 leftIndex = 0
                 rightIndex = leftIndex
             }
             else if (offset.x >= scrollView.contentSize.width - scrollView.frame.width) {
+                //右边界
                 leftIndex = itemLabels.count - 1
                 rightIndex = leftIndex
             }
@@ -367,10 +369,12 @@ extension CKSlideMenu: UIScrollViewDelegate {
                 rightIndex = leftIndex + 1
             }
             
+            //计算偏移的相对位移
             let relativeLacation = bodyScrollView.contentOffset.x/bodyScrollView.frame.width - CGFloat(leftIndex)
             if relativeLacation == 0 {
                 return
             }
+            //更新UI
             self.updateIndicatorStyle(relativeLacation)
             self.updateTitleStyle(relativeLacation)
             
@@ -392,10 +396,12 @@ extension CKSlideMenu: UIScrollViewDelegate {
         let rightItem = itemLabels[rightIndex]
         
         if indicatorStyle == .normal {
+            //常规模式 只需更新中心点即可
             let max = rightItem.center.x - leftItem.center.x
             self.indicatorView.center = CGPoint(x:leftItem.center.x + max*relativeLacation,y:indicatorView.center.y)
         }
         else {
+            //仔细观察位移效果，分析出如下计算公式
             let distance = indicatorStyle == .followText ? 0 : indicatorAnimatePadding
             var frame = self.indicatorView.frame
             let maxWidth = rightItem.frame.maxX - leftItem.frame.minX - distance*2
