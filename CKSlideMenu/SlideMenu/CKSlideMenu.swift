@@ -10,7 +10,7 @@ import UIKit
 
 enum SlideMenuTitleStyle {
     case normal             //默认
-    case gradient           //颜色渐变
+    case gradient           //渐变颜色
     case transfrom          //放大
 }
 
@@ -20,79 +20,155 @@ enum SlideMenuIndicatorStyle {
     case stretch            //伸缩  默认
 }
 
-//伸缩动画的偏移量
-fileprivate let indicatorAnimatePadding:CGFloat = 8.0
+
 
 class CKSlideMenu: UIView {
     
-    // 选中颜色
+    //MARK: - 成员变量
+    /// 是否是固定型菜单（不需要修正滚动）
+    var isFixed:Bool = false
+    
+    /// 是否懒加载子控制器
+    var lazyLoad:Bool = true
+    
+    /// 选中颜色
     var selectedColor:UIColor       = UIColor.red {
         didSet {
-            updateColors()
+            for item in itemButtons {
+                item.setTitleColor(selectedColor, for: .selected)
+            }
         }
     }
-    // 未选中颜色
+    
+    /// 未选中颜色
     var unSelectedColor:UIColor     = UIColor.black {
         didSet {
-            updateColors()
+            for item in itemButtons {
+                item.setTitleColor(unSelectedColor, for: .normal)
+            }
         }
     }
-    // 下标宽度
+    
+    /// 下标宽度
     var indicatorWidth:CGFloat      = 30 {  //SlideMenuIndicatorStyle 为normal时有效
         didSet {
-            setupIndicatorView()
+            setNeedsLayout()
         }
     }
-    // 下标高度
+    
+    /// 下标高度
     var indicatorHeight:CGFloat     = 2 {
         didSet {
-            setupIndicatorView()
+            setNeedsLayout()
         }
     }
-    // 下标距离底部距离
-    var bottomPadding:CGFloat       = 2 {
+    
+    /// 下标距离底部距离
+    var bottomPadding:CGFloat       = 0 {
         didSet {
-            setupIndicatorView()
+            setNeedsLayout()
         }
     }
-    // 标题字体
+    
+    //伸缩动画的偏移量 在indicatorStyle = stretch是生效
+    var indicatorAnimatePadding:CGFloat = 8.0
+    
+    /// 标题字体
     var font:UIFont                 = UIFont.systemFont(ofSize: 13) {
         didSet {
-            updateFonts()
+            needLayout = true
+            setNeedsLayout()
         }
     }
     
-    var indicatorStyle:SlideMenuIndicatorStyle = .stretch
-    var titleStyle:SlideMenuTitleStyle = .normal
+    /// 下标样式
+    var indicatorStyle:SlideMenuIndicatorStyle = .normal {
+        didSet{
+            setNeedsLayout()
+        }
+    }
     
-    var tabScrollView:UIScrollView
-    var bodyScrollView:UIScrollView
-    var indicatorView:UIView = UIView()
-    var line:UIView = UIView()
+    /// 标题样式
+    var titleStyle:SlideMenuTitleStyle = .normal {
+        didSet{
+            setNeedsLayout()
+        }
+    }
     
+    ///bodyScrollView的父视图,默认为SlideMenu的父视图
+    weak var bodySuperView:UIView? {
+        didSet{
+            needLayout = true
+            setNeedsLayout()
+        }
+    }
+    
+    ///bodyScrollView的frame
+    var bodyFrame:CGRect = CGRect.zero {
+        didSet{
+            bodyScrollView.frame = bodyFrame
+        }
+    }
+    
+    
+    /// 菜单栏
+    lazy var tabScrollView:UIScrollView = {
+        let  tabScrollView = UIScrollView.init(frame: self.bounds)
+        tabScrollView.showsVerticalScrollIndicator = false
+        tabScrollView.showsHorizontalScrollIndicator = false
+        tabScrollView.backgroundColor = UIColor.clear
+        return tabScrollView
+    }()
+    
+    
+    /// 内容视图
+    lazy var bodyScrollView:UIScrollView = {
+        let bodyScrollView = UIScrollView.init(frame: CGRect.zero)
+        bodyScrollView.showsVerticalScrollIndicator = false
+        bodyScrollView.showsHorizontalScrollIndicator = false
+        bodyScrollView.isPagingEnabled = true
+        bodyScrollView.bounces = false
+        bodyScrollView.delegate = self
+        return bodyScrollView
+    }()
+    
+    
+    /// 下标视图
+    lazy var indicatorView:UIView = UIView()
+    
+    ///当前索引
+    fileprivate(set) var currentIndex:Int = 0
+    
+    /// 底部分割线 默认不显示
+    lazy var line:UIView = UIView()
     
     fileprivate var leftIndex:Int = 0
     fileprivate var rightIndex:Int = 0
-    fileprivate var selectedIndex:Int = 0
-    fileprivate var itemLabels:Array<UILabel>  = []
-    // tab边距
-    private var itemMargin:CGFloat = 15.0
+   
+    fileprivate var itemButtons:Array<UIButton>  = []
+    // tab文字的边距
+    fileprivate var itemMargin:CGFloat = 15.0
+    
+    private var needLayout:Bool = true
     private var titlesArr:Array<String>
     private var controllers:Array<UIViewController>
     
     
-    // MARK: -
+    // MARK: - 生命周期
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     init(frame:CGRect ,titles:Array<String>, childControllers:Array<UIViewController>) {
-        
-        tabScrollView = UIScrollView()
-        bodyScrollView = UIScrollView()
         titlesArr = titles
         controllers = childControllers
         super.init(frame: frame)
         
-        setupTabScrollView()
-        setupIndicatorView()
+        addSubview(tabScrollView)
+        tabScrollView.addSubview(indicatorView)
+        indicatorView.backgroundColor = selectedColor
         line.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        line.isHidden = true
         self.addSubview(line)
     }
 
@@ -101,79 +177,91 @@ class CKSlideMenu: UIView {
         
         tabScrollView.frame = self.bounds
         line.frame = CGRect(x: 0, y: self.frame.height - 0.5, width: self.frame.width, height: 0.5)
-        for item in itemLabels {
-            var frame = item.frame
-            frame.size.height = self.frame.height
-            item.frame = frame
-        }
         
-        if (self.bodyScrollView.superview) == nil {
-            self.superview?.addSubview(bodyScrollView)
-            setupBodyScrollView()
-        }
-        
-    }
-    private func setupBodyScrollView() {
-        
-        bodyScrollView.showsVerticalScrollIndicator = false
-        bodyScrollView.showsHorizontalScrollIndicator = false
-        bodyScrollView.isPagingEnabled = true
-        bodyScrollView.bounces = false
-        bodyScrollView.delegate = self
-        if let frame = self.superview?.frame {
-            bodyScrollView.frame = CGRect(x: 0, y: self.frame.maxY, width: frame.width, height: frame.height - self.frame.maxY)
-            for (i,vc) in controllers.enumerated() {
-                vc.view.frame = bodyScrollView.bounds
-                vc.view.center = CGPoint(x: bodyScrollView.frame.width*(CGFloat(i)+0.5), y: bodyScrollView.frame.height/2)
-                bodyScrollView.addSubview(vc.view)
+        if needLayout {
+            for item in itemButtons {
+                item.removeFromSuperview()
+            }
+            itemButtons.removeAll()
+            setupTabScrollView()
+            if bodySuperView != nil {
+                bodySuperView?.addSubview(bodyScrollView)
+            }
+            else{
+                superview?.addSubview(bodyScrollView)
+            }
+            if lazyLoad {
+                lazyLoadContents(at: currentIndex)
+            }
+            else {
+                for (index, vc) in controllers.enumerated() {
+                    vc.view.frame = bodyScrollView.bounds
+                    vc.view.center = CGPoint(x: bodyScrollView.frame.width*(CGFloat(index)+0.5), y: bodyScrollView.frame.height/2)
+                    bodyScrollView.addSubview(vc.view)
+                }
             }
             bodyScrollView.contentSize = CGSize(width: bodyScrollView.frame.width*CGFloat(controllers.count), height: bodyScrollView.frame.height)
+            bodyScrollView.setContentOffset(CGPoint(x:bodyScrollView.frame.size.width*CGFloat(currentIndex), y:0), animated: false)
+            resetTabScrollViewFrame()
+            needLayout = false
         }
+        setupIndicatorView()
     }
     
-    // 配置导航栏
+    /// 配置导航栏
     private func setupTabScrollView()  {
         
-        tabScrollView.frame = self.bounds
-        tabScrollView.showsVerticalScrollIndicator = false
-        tabScrollView.showsHorizontalScrollIndicator = false
-        tabScrollView.backgroundColor = UIColor.clear
-        self.addSubview(tabScrollView)
-        
-        var originX = itemMargin
-        for (index ,title) in titlesArr.enumerated() {
+        var originX:CGFloat = 0
+        var totalTextLenght:CGFloat = 0
+        for (index,title) in titlesArr.enumerated() {
+            let item = UIButton.init()
+            item.setTitleColor(selectedColor, for: .selected)
+            item.setTitleColor(unSelectedColor, for: .normal)
+            item.reversesTitleShadowWhenHighlighted = true
+            item.titleLabel?.font = font
+            item.setTitle(title, for: .normal)
+            item.addTarget(self, action: #selector(itemClicked(_:)), for: .touchUpInside)
             
-            let item = UILabel()
-            item.isUserInteractionEnabled = true
-            //计算title长度
             let size = (title as NSString).size(attributes: [NSFontAttributeName:font])
-            item.frame = CGRect(x: originX, y: 0, width: size.width, height: self.frame.height)
-            //设置属性
-            item.text = title
-            item.font = font
-            item.textColor = index == selectedIndex ? selectedColor : unSelectedColor
-            //添加tap手势
-            item.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(itemClicked(gesture:))))
-        
-            itemLabels.append(item)
+            item.frame = CGRect(x: originX, y: 0, width: size.width + itemMargin*2, height: self.frame.height)
+            item.textWidth = size.width
+            originX = item.frame.maxX
+            itemButtons.append(item)
             tabScrollView.addSubview(item)
-            
-            originX = item.frame.maxX + 2*itemMargin
+            item.isSelected = index == currentIndex
+            if titleStyle == .transfrom && index == currentIndex {
+                transformItem(item, isIdentify: false)
+            }
+            totalTextLenght += size.width
         }
-        tabScrollView.contentSize = CGSize(width: originX - itemMargin, height: self.frame.height)
-        tabScrollView.addSubview(indicatorView)
         
-        if tabScrollView.contentSize.width < self.frame.width {
-            //item长度小于width，重新计算margin排版
-            self.updateLabelsFrame()
+        //固定型修正
+        if isFixed {
+            if totalTextLenght > self.frame.width {
+                //文字长度超过容器，则平分宽度
+                let width = self.frame.width/CGFloat(self.titlesArr.count)
+                for (index,item) in itemButtons.enumerated() {
+                    item.frame = CGRect(x: width*CGFloat(index), y: 0, width: width, height: item.frame.height)
+                    item.textWidth = width
+                }
+            }
+            else{
+                //未超过，按照文本长度计算margin
+                let margin = (self.frame.width - totalTextLenght)/CGFloat(titlesArr.count*2)
+                originX = 0
+                for (_,item) in itemButtons.enumerated() {
+                    item.frame = CGRect(x: originX, y: 0, width: item.textWidth+2*margin, height: item.frame.height)
+                    originX = item.frame.maxX
+                }
+            }
         }
+        tabScrollView.contentSize = CGSize(width: originX, height: self.frame.height)
     }
     
-    
-    //配置下标
+    ///配置下标
     private func setupIndicatorView() {
-
-        var frame = itemLabels[selectedIndex].frame
+        
+        var frame = itemButtons[currentIndex].frame
         frame.origin.y = self.frame.height - bottomPadding - indicatorHeight
         frame.size.height = indicatorHeight
         
@@ -181,88 +269,24 @@ class CKSlideMenu: UIView {
             frame.origin.x = frame.midX - indicatorWidth/2
             frame.size.width = indicatorWidth
         }
+        else {
+            let text = titlesArr[currentIndex]
+            let size = (text as NSString).size(attributes: [NSFontAttributeName:font])
+            frame.origin.x = frame.midX - size.width/2
+            frame.size.width = size.width
+        }
         indicatorView.frame = frame
-        indicatorView.backgroundColor = selectedColor
-        
     }
     
-    
-    // 更新itemLabels的布局
-    private func updateLabelsFrame() {
-        
-        let newMarigin = itemMargin + (self.frame.width - tabScrollView.contentSize.width)/CGFloat(self.itemLabels.count*2)
-        var originX = newMarigin
-        for item in itemLabels {
-            var frame = item.frame
-            frame.size.height = self.frame.height
-            frame.origin.x = originX
-            item.frame = frame
-            originX = frame.maxX + 2 * newMarigin
-        }
-        tabScrollView.contentSize = CGSize(width: originX - newMarigin, height: frame.height)
-    }
-    
-    // 更新字体
-    private func updateFonts() {
-        
-        var originX = itemMargin
-        for item in itemLabels {
-            //计算title长度
-            let size = (item.text! as NSString).size(attributes: [NSFontAttributeName:font])
-            item.frame = CGRect(x: originX, y: 0, width: size.width, height: self.frame.height)
-            //设置属性
-            item.font = font
-
-            originX = item.frame.maxX + 2*itemMargin
-        }
-        tabScrollView.contentSize = CGSize(width: originX - itemMargin, height: self.frame.height)
-        if tabScrollView.contentSize.width < self.frame.width {
-            //item长度小于width，重新计算margin排版
-            self.updateLabelsFrame()
-        }
-        setupIndicatorView()
-    }
-    
-    // 更新颜色
-    private func updateColors() {
-        for item in itemLabels {
-            item.textColor = unSelectedColor
-        }
-        itemLabels[selectedIndex].textColor = selectedColor
-        indicatorView.backgroundColor = selectedColor
-    }
-    
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    //渐变颜色
-    fileprivate func averageColor(fromColor:UIColor , toColor:UIColor , percent:CGFloat) -> UIColor {
-        var fromRed:CGFloat = 0.0
-        var fromGreen:CGFloat = 0.0
-        var fromBlue:CGFloat = 0.0
-        var fromAlpha:CGFloat = 0.0
-        fromColor.getRed(&fromRed, green: &fromGreen, blue: &fromBlue, alpha: &fromAlpha)
-
-        var toRed:CGFloat = 0.0
-        var toGreen:CGFloat = 0.0
-        var toBlue:CGFloat = 0.0
-        var toAlpha:CGFloat = 0.0
-        toColor.getRed(&toRed, green: &toGreen, blue: &toBlue, alpha: &toAlpha)
-        
-        let nowRed = fromRed + (toRed - fromRed)*percent
-        let nowGreen = fromGreen + (toGreen - fromGreen)*percent
-        let nowBlue = fromBlue + (toBlue - fromBlue)*percent
-        let nowAlpha = fromAlpha + (toAlpha - fromAlpha)*percent
-        
-        return UIColor(red: nowRed, green: nowGreen, blue: nowBlue, alpha: nowAlpha)
-    }
     
     // 修正tabScrollView的位置
     fileprivate func resetTabScrollViewFrame() {
-        let seletedItem = itemLabels[selectedIndex]
+        
+        if self.isFixed {
+            return
+        }
+        
+        let seletedItem = itemButtons[currentIndex]
         let tab_width = tabScrollView.frame.width
         var reviseX:CGFloat = 0
         
@@ -278,31 +302,155 @@ class CKSlideMenu: UIView {
         tabScrollView.setContentOffset(CGPoint(x:reviseX,y:0), animated: true)
     }
     
+    /// 懒加载子控制器
+    ///
+    /// - Parameter index: 索引
+    fileprivate func lazyLoadContents(at index:Int)  {
+        let vc = controllers[index]
+        if !vc.isViewLoaded {
+            vc.view.frame = bodyScrollView.bounds
+            vc.view.center = CGPoint(x: bodyScrollView.frame.width*(CGFloat(index)+0.5), y: bodyScrollView.frame.height/2)
+            bodyScrollView.addSubview(vc.view)
+        }
+    }
+    
+    
+    deinit {
+        print("\(#function)")
+    }
+    
+    
+    //MARK: - 事件及UI
+    
+    func scrollToIndex(_ index:UInt) {
+        if itemButtons.count > Int(index) {
+            let button = itemButtons[currentIndex]
+            itemClicked(button)
+        }
+        else {
+            currentIndex = Int(index)
+        }
+    }
+    
+    
+    /// 更新下标的UI效果
+    ///
+    /// - Parameter relativeLacation: 滑动的相对距离
+    func updateIndicatorStyle(_ relativeLacation:CGFloat) {
+        
+        let leftItem = itemButtons[leftIndex]
+        let rightItem = itemButtons[rightIndex]
+        
+        switch indicatorStyle {
+        case .normal:
+            //常规模式 只需更新中心点即可
+            let max = rightItem.center.x - leftItem.center.x
+            self.indicatorView.center = CGPoint(x:leftItem.center.x + max*relativeLacation,y:indicatorView.center.y)
+        case .followText:
+            
+            
+            var frame = self.indicatorView.frame
+            let maxWidth = rightItem.textWidth - leftItem.textWidth
+            frame.size.width = leftItem.textWidth + maxWidth*relativeLacation
+            indicatorView.frame = frame
+            
+            let max = rightItem.center.x - leftItem.center.x
+            indicatorView.center = CGPoint(x:leftItem.center.x + max*relativeLacation,y:indicatorView.center.y)
+            
+        case .stretch:
+            //仔细观察位移效果，分析出如下计算公式
+            var frame = self.indicatorView.frame
+            
+            let maxWidth = rightItem.textMaxX - leftItem.textMinX - indicatorAnimatePadding*2
+            if relativeLacation <= 0.5 {
+                frame.size.width = leftItem.textWidth + (maxWidth - leftItem.textWidth)*(relativeLacation/0.5)
+                frame.origin.x = leftItem.textMinX + indicatorAnimatePadding*(relativeLacation/0.5)
+            }
+            else{
+                frame.size.width = rightItem.textWidth + (maxWidth - rightItem.textWidth)*((1-relativeLacation)/0.5)
+                frame.origin.x = rightItem.textMaxX - frame.size.width - indicatorAnimatePadding*((1-relativeLacation)/0.5)
+            }
+            self.indicatorView.frame = frame
+        }
+    }
+    
+    
+    /// 更新标题的UI效果
+    ///
+    /// - Parameter relativeLacation: 滑动的相对距离
+    func updateTitleStyle(_ relativeLacation:CGFloat) {
+        
+        let leftItem = itemButtons[leftIndex]
+        let rightItem = itemButtons[rightIndex]
+        
+        switch titleStyle {
+        case .gradient:
+            
+            leftItem.isSelected = relativeLacation <= 0.5
+            rightItem.isSelected = relativeLacation > 0.5
+            
+            let percent = relativeLacation <= 0.5 ? (1-relativeLacation) : relativeLacation
+            
+            leftItem.setTitleColor(self.averageColor(fromColor: unSelectedColor, toColor: selectedColor, percent: percent), for: .selected)
+            leftItem.setTitleColor(self.averageColor(fromColor: selectedColor, toColor: unSelectedColor, percent: percent), for: .normal)
+            
+            rightItem.setTitleColor(self.averageColor(fromColor: unSelectedColor, toColor: selectedColor, percent: percent), for: .selected)
+            rightItem.setTitleColor(self.averageColor(fromColor: selectedColor, toColor: unSelectedColor, percent: percent), for: .normal)
+            
+        case .normal:
+            leftItem.isSelected = relativeLacation <= 0.5
+            rightItem.isSelected = relativeLacation > 0.5
+            
+        default:
+            
+            if relativeLacation <= 0.5 {
+                transformItem(leftItem, isIdentify: false)
+                transformItem(rightItem, isIdentify: true)
+            }
+            else {
+                transformItem(leftItem, isIdentify: true)
+                transformItem(rightItem, isIdentify: false)
+            }
+            break
+        }
+    }
+    
+    
+    /// 对item进行放大和还原操作
+    ///
+    /// - Parameters:
+    ///   - item: button
+    ///   - isIdentify: 是否还原
+    private func transformItem(_ item:UIButton, isIdentify:Bool) {
+        item.isSelected = !isIdentify
+        item.transform = isIdentify ? CGAffineTransform.identity : CGAffineTransform.init(scaleX: 1.05, y: 1.05)
+
+    }
+    
     
     // 导航栏点击事件
-    func itemClicked(gesture:UITapGestureRecognizer) {
-        let item = gesture.view as! UILabel
-        if item == itemLabels[selectedIndex] {
+    func itemClicked(_ button:UIButton) {
+        if button.isSelected {
             return
         }
-        let fromIndex = selectedIndex
-        selectedIndex = itemLabels.index(of: item)!
-        self.changeTitleItem(from: fromIndex, to: selectedIndex)
-        self.changeIndicator(from: fromIndex, to: selectedIndex)
-        bodyScrollView.setContentOffset(CGPoint(x:bodyScrollView.frame.size.width*CGFloat(selectedIndex), y:0), animated: false)
+        let fromIndex = currentIndex
+        currentIndex = itemButtons.index(of: button)!
+        self.changeTitleItem(from: fromIndex, to: currentIndex)
+        self.changeIndicator(from: fromIndex, to: currentIndex)
+        bodyScrollView.setContentOffset(CGPoint(x:bodyScrollView.frame.size.width*CGFloat(currentIndex), y:0), animated: false)
         self.resetTabScrollViewFrame()
     }
     
     //点击事件触发的UI更新
     private func changeTitleItem(from:Int ,to:Int) {
         
-        self.itemLabels[from].textColor = self.unSelectedColor
-        self.itemLabels[to].textColor = self.selectedColor
+        self.itemButtons[from].isSelected = false
+        self.itemButtons[to].isSelected = true
         
         if titleStyle == .transfrom {
             UIView.animate(withDuration: 0.25, animations: {
-                self.itemLabels[to].transform = CGAffineTransform.init(scaleX: 1.05, y: 1.05)
-                self.itemLabels[from].transform = CGAffineTransform.identity
+                self.itemButtons[to].transform = CGAffineTransform.init(scaleX: 1.05, y: 1.05)
+                self.itemButtons[from].transform = CGAffineTransform.identity
                 
             }, completion: nil)
         }
@@ -310,23 +458,31 @@ class CKSlideMenu: UIView {
     
     //点击事件触发的UI更新
     private func changeIndicator(from:Int, to:Int) {
-        let fromItem = itemLabels[from]
-        let toItem = itemLabels[to]
+        let fromItem = itemButtons[from]
+        let toItem = itemButtons[to]
         
-        if indicatorStyle != .stretch {
+        switch indicatorStyle {
+        case .normal:
             UIView.animate(withDuration: 0.3, animations: {
                 self.indicatorView.center = CGPoint(x:toItem.center.x,y:self.indicatorView.center.y)
             })
-        }
-        else {
+        case .followText:
+            var bounds = indicatorView.bounds
+            bounds.size.width = toItem.textWidth
+            UIView.animate(withDuration: 0.3, animations: {
+                self.indicatorView.bounds = bounds
+                self.indicatorView.center = CGPoint(x:toItem.center.x,y:self.indicatorView.center.y)
+                
+            })
+        case .stretch:
             var frame = indicatorView.frame
-            frame.size.width = itemLabels[to].frame.width
-            
+            frame.size.width = itemButtons[to].textWidth
             let finnalFrame = frame
             
-            let max = fromItem.frame.width + toItem.frame.width + 2*itemMargin
+            let max = fromItem.textWidth + toItem.textWidth + 2*itemMargin
             frame.size.width = max - indicatorAnimatePadding*2
-            let x = (toItem.frame.maxX - fromItem.frame.minX)/2 + fromItem.frame.minX
+            
+            let x = (toItem.frame.maxX - fromItem.frame.minX)/2 + fromItem.frame.minX + itemMargin
             
             UIView.animateKeyframes(withDuration: 0.3, delay: 0, options: .calculationModePaced, animations: {
                 
@@ -354,6 +510,18 @@ extension CKSlideMenu: UIScrollViewDelegate {
         
         if scrollView == self.bodyScrollView {
             let offset = scrollView.contentOffset
+            currentIndex = lroundf(Float(scrollView.contentOffset.x / scrollView.frame.size.width))
+            
+            var index = currentIndex
+            if offset.x > scrollView.frame.width*CGFloat(currentIndex) {
+                
+                index = (currentIndex + 1) >= itemButtons.count ? currentIndex : currentIndex + 1
+            }
+            else if (offset.x < scrollView.frame.width*CGFloat(currentIndex)) {
+                index = (currentIndex - 1) < 0 ? 0 : currentIndex - 1
+            }
+            lazyLoadContents(at:index)
+            
             if offset.x <= 0 {
                 // 左边界
                 leftIndex = 0
@@ -361,7 +529,7 @@ extension CKSlideMenu: UIScrollViewDelegate {
             }
             else if (offset.x >= scrollView.contentSize.width - scrollView.frame.width) {
                 //右边界
-                leftIndex = itemLabels.count - 1
+                leftIndex = itemButtons.count - 1
                 rightIndex = leftIndex
             }
             else{
@@ -384,83 +552,67 @@ extension CKSlideMenu: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == bodyScrollView {
-            selectedIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+            currentIndex = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+//            lazyLoadContents(at:currentIndex)
             self.resetTabScrollViewFrame()
         }
     }
     
-    
-    func updateIndicatorStyle(_ relativeLacation:CGFloat) {
-        
-        let leftItem = itemLabels[leftIndex]
-        let rightItem = itemLabels[rightIndex]
-        
-        if indicatorStyle == .normal {
-            //常规模式 只需更新中心点即可
-            let max = rightItem.center.x - leftItem.center.x
-            self.indicatorView.center = CGPoint(x:leftItem.center.x + max*relativeLacation,y:indicatorView.center.y)
-        }
-        else {
-            //仔细观察位移效果，分析出如下计算公式
-            let distance = indicatorStyle == .followText ? 0 : indicatorAnimatePadding
-            var frame = self.indicatorView.frame
-            let maxWidth = rightItem.frame.maxX - leftItem.frame.minX - distance*2
-            if relativeLacation <= 0.5 {
-                frame.size.width = leftItem.frame.width + (maxWidth - leftItem.frame.width)*(relativeLacation/0.5)
-                frame.origin.x = leftItem.frame.minX + distance*(relativeLacation/0.5)
-            }
-            else{
-                frame.size.width = rightItem.frame.width + (maxWidth - rightItem.frame.width)*((1-relativeLacation)/0.5)
-                frame.origin.x = rightItem.frame.maxX - frame.size.width - distance*((1-relativeLacation)/0.5)
-            }
-            self.indicatorView.frame = frame
-        }
-    }
-    
-    
-    func updateTitleStyle(_ relativeLacation:CGFloat) {
-        let leftItem = itemLabels[leftIndex]
-        let rightItem = itemLabels[rightIndex]
-        switch titleStyle {
-        case .gradient:
-            leftItem.textColor = self.averageColor(fromColor: selectedColor, toColor: unSelectedColor, percent: relativeLacation)
-            rightItem.textColor = self.averageColor(fromColor: unSelectedColor, toColor: selectedColor, percent: relativeLacation)
-            
-        case .normal:
-            leftItem.textColor = relativeLacation <= 0.5 ? selectedColor : unSelectedColor
-            rightItem.textColor = relativeLacation <= 0.5 ? unSelectedColor : selectedColor
-
-        default:
-
-            if relativeLacation <= 0.5 {
-        
-                leftItem.textColor = selectedColor
-                leftItem.transform = CGAffineTransform.init(scaleX: 1.05, y: 1.05)
-                
-                rightItem.textColor = unSelectedColor
-                rightItem.transform = CGAffineTransform.identity
-            }
-            else {
-                leftItem.textColor = unSelectedColor
-                leftItem.transform = CGAffineTransform.identity
-                
-                rightItem.textColor = selectedColor
-                rightItem.transform = CGAffineTransform.init(scaleX: 1.05, y: 1.05)
-            }
-            break
-        }
-        
-    }
-    
-    
 }
 
 
+extension CKSlideMenu {
+    //渐变颜色
+    fileprivate func averageColor(fromColor:UIColor , toColor:UIColor , percent:CGFloat) -> UIColor {
+        var fromRed:CGFloat = 0.0
+        var fromGreen:CGFloat = 0.0
+        var fromBlue:CGFloat = 0.0
+        var fromAlpha:CGFloat = 0.0
+        fromColor.getRed(&fromRed, green: &fromGreen, blue: &fromBlue, alpha: &fromAlpha)
+        
+        var toRed:CGFloat = 0.0
+        var toGreen:CGFloat = 0.0
+        var toBlue:CGFloat = 0.0
+        var toAlpha:CGFloat = 0.0
+        toColor.getRed(&toRed, green: &toGreen, blue: &toBlue, alpha: &toAlpha)
+        
+        let nowRed = fromRed + (toRed - fromRed)*percent
+        let nowGreen = fromGreen + (toGreen - fromGreen)*percent
+        let nowBlue = fromBlue + (toBlue - fromBlue)*percent
+        let nowAlpha = fromAlpha + (toAlpha - fromAlpha)*percent
+        
+        return UIColor(red: nowRed, green: nowGreen, blue: nowBlue, alpha: nowAlpha)
+    }
+}
 
-
-
-
-
+    
+private extension UIButton {
+    private struct AssociatedKeys {
+        static var textWidthName = "key_textWidth"
+    }
+    
+    /// title的文本长度
+    var textWidth:CGFloat {
+        get{
+            return objc_getAssociatedObject(self, &AssociatedKeys.textWidthName) as? CGFloat ?? 0
+        }
+        set{
+            objc_setAssociatedObject(self, &AssociatedKeys.textWidthName, newValue , objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    var textMinX:CGFloat {
+        get {
+            return (self.frame.width - self.textWidth)/2 + self.frame.minX
+        }
+    }
+    
+    var textMaxX:CGFloat {
+        get {
+            return self.frame.maxX - (self.frame.width - self.textWidth)/2
+        }
+    }
+}
 
 
 

@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.title = "SlideMenu"
+        self.title = "Demo"
 
     }
 

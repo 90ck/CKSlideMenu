@@ -14,8 +14,8 @@
 		673DF4BB1EF79D7F0095BD94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 673DF4B91EF79D7F0095BD94 /* LaunchScreen.storyboard */; };
 		673DF4C61EF79D7F0095BD94 /* CKSlideMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673DF4C51EF79D7F0095BD94 /* CKSlideMenuTests.swift */; };
 		673DF4D11EF79D7F0095BD94 /* CKSlideMenuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673DF4D01EF79D7F0095BD94 /* CKSlideMenuUITests.swift */; };
-		673DF4E21EF79DF20095BD94 /* CKSlideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673DF4E11EF79DF20095BD94 /* CKSlideMenu.swift */; };
 		673DF4E41EF79E5D0095BD94 /* CKChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673DF4E31EF79E5D0095BD94 /* CKChildViewController.swift */; };
+		67F4FD8C1F4AFD06006696ED /* CKSlideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F4FD8B1F4AFD06006696ED /* CKSlideMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +49,8 @@
 		673DF4CC1EF79D7F0095BD94 /* CKSlideMenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CKSlideMenuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		673DF4D01EF79D7F0095BD94 /* CKSlideMenuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSlideMenuUITests.swift; sourceTree = "<group>"; };
 		673DF4D21EF79D7F0095BD94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		673DF4E11EF79DF20095BD94 /* CKSlideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSlideMenu.swift; sourceTree = "<group>"; };
 		673DF4E31EF79E5D0095BD94 /* CKChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKChildViewController.swift; sourceTree = "<group>"; };
+		67F4FD8B1F4AFD06006696ED /* CKSlideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKSlideMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +134,7 @@
 		673DF4DE1EF79DD80095BD94 /* SlideMenu */ = {
 			isa = PBXGroup;
 			children = (
-				673DF4E11EF79DF20095BD94 /* CKSlideMenu.swift */,
+				67F4FD8B1F4AFD06006696ED /* CKSlideMenu.swift */,
 			);
 			path = SlideMenu;
 			sourceTree = "<group>";
@@ -276,7 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				673DF4E21EF79DF20095BD94 /* CKSlideMenu.swift in Sources */,
+				67F4FD8C1F4AFD06006696ED /* CKSlideMenu.swift in Sources */,
 				673DF4B31EF79D7F0095BD94 /* ViewController.swift in Sources */,
 				673DF4B11EF79D7F0095BD94 /* AppDelegate.swift in Sources */,
 				673DF4E41EF79E5D0095BD94 /* CKChildViewController.swift in Sources */,
@@ -532,6 +532,7 @@
 				673DF4D71EF79D7F0095BD94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		673DF4D81EF79D7F0095BD94 /* Build configuration list for PBXNativeTarget "CKSlideMenuTests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +541,7 @@
 				673DF4DA1EF79D7F0095BD94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		673DF4DB1EF79D7F0095BD94 /* Build configuration list for PBXNativeTarget "CKSlideMenuUITests" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +550,7 @@
 				673DF4DD1EF79D7F0095BD94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
