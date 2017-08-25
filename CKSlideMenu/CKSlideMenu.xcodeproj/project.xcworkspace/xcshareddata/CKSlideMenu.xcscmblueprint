@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2B45ADBEF0FD29ED1F5FDACEE4DCF25E58E3B62A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "FA60C986F29F46A6FAE375CC97183B4B6F231023" : 9223372036854775807,
+    "2B45ADBEF0FD29ED1F5FDACEE4DCF25E58E3B62A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FF131217-75B2-4D4F-BDE5-97AFFDC67D38",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "FA60C986F29F46A6FAE375CC97183B4B6F231023" : "..\/..",
+    "2B45ADBEF0FD29ED1F5FDACEE4DCF25E58E3B62A" : "CKSlideMenu\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CKSlideMenu",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CKSlideMenu\/CKSlideMenu.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/github.com\/90ck\/CKSlideMenu.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2B45ADBEF0FD29ED1F5FDACEE4DCF25E58E3B62A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git.coding.net:anke90\/work.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FA60C986F29F46A6FAE375CC97183B4B6F231023"
+    }
+  ]
+}
