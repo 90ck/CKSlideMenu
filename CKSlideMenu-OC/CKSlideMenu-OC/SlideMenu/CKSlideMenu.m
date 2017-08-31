@@ -116,6 +116,8 @@ static NSString *textMaxX_Key;
     
     [self loadBodyContentAtIndex:_currentIndex];
     
+    [self resetTabScrollViewFrame];
+    
     _bodyScrollView.contentSize = CGSizeMake(_bodyScrollView.frame.size.width*_controllers.count, _bodyScrollView.frame.size.height);
     [_bodyScrollView setContentOffset:CGPointMake(_bodyScrollView.frame.size.width*_currentIndex, 0) animated:NO];
     
