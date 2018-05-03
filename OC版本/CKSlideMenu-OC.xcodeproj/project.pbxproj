@@ -1,0 +1,570 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		67F4FD9B1F4B22D8006696ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F4FD9A1F4B22D8006696ED /* main.m */; };
+		67F4FD9E1F4B22D8006696ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F4FD9D1F4B22D8006696ED /* AppDelegate.m */; };
+		67F4FDA41F4B22D8006696ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67F4FDA21F4B22D8006696ED /* Main.storyboard */; };
+		67F4FDA61F4B22D8006696ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67F4FDA51F4B22D8006696ED /* Assets.xcassets */; };
+		67F4FDA91F4B22D8006696ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67F4FDA71F4B22D8006696ED /* LaunchScreen.storyboard */; };
+		67F4FDB41F4B22D8006696ED /* CKSlideMenu_OCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F4FDB31F4B22D8006696ED /* CKSlideMenu_OCTests.m */; };
+		67F4FDBF1F4B22D9006696ED /* CKSlideMenu_OCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F4FDBE1F4B22D9006696ED /* CKSlideMenu_OCUITests.m */; };
+		67F4FDCE1F4B2333006696ED /* CKChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F4FDCD1F4B2333006696ED /* CKChildViewController.m */; };
+		67F4FDD21F4B2362006696ED /* CKSlideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F4FDD11F4B2362006696ED /* CKSlideMenu.m */; };
+		67F4FDD51F4B23B2006696ED /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F4FDD41F4B23B2006696ED /* TableViewController.m */; };
+		67FE19651F4EB6D10066D7FC /* CkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67FE19641F4EB6D10066D7FC /* CkViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		67F4FDB01F4B22D8006696ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67F4FD8E1F4B22D8006696ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 67F4FD951F4B22D8006696ED;
+			remoteInfo = "CKSlideMenu-OC";
+		};
+		67F4FDBB1F4B22D9006696ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67F4FD8E1F4B22D8006696ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 67F4FD951F4B22D8006696ED;
+			remoteInfo = "CKSlideMenu-OC";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		67F4FD961F4B22D8006696ED /* CKSlideMenu-OC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CKSlideMenu-OC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		67F4FD9A1F4B22D8006696ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		67F4FD9C1F4B22D8006696ED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		67F4FD9D1F4B22D8006696ED /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		67F4FDA31F4B22D8006696ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		67F4FDA51F4B22D8006696ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		67F4FDA81F4B22D8006696ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		67F4FDAA1F4B22D8006696ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67F4FDAF1F4B22D8006696ED /* CKSlideMenu-OCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CKSlideMenu-OCTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		67F4FDB31F4B22D8006696ED /* CKSlideMenu_OCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKSlideMenu_OCTests.m; sourceTree = "<group>"; };
+		67F4FDB51F4B22D8006696ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67F4FDBA1F4B22D9006696ED /* CKSlideMenu-OCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CKSlideMenu-OCUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		67F4FDBE1F4B22D9006696ED /* CKSlideMenu_OCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKSlideMenu_OCUITests.m; sourceTree = "<group>"; };
+		67F4FDC01F4B22D9006696ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67F4FDCC1F4B2333006696ED /* CKChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKChildViewController.h; sourceTree = "<group>"; };
+		67F4FDCD1F4B2333006696ED /* CKChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKChildViewController.m; sourceTree = "<group>"; };
+		67F4FDD01F4B2362006696ED /* CKSlideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKSlideMenu.h; sourceTree = "<group>"; };
+		67F4FDD11F4B2362006696ED /* CKSlideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKSlideMenu.m; sourceTree = "<group>"; };
+		67F4FDD31F4B23B2006696ED /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		67F4FDD41F4B23B2006696ED /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		67FE19631F4EB6D10066D7FC /* CkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CkViewController.h; sourceTree = "<group>"; };
+		67FE19641F4EB6D10066D7FC /* CkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CkViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		67F4FD931F4B22D8006696ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67F4FDAC1F4B22D8006696ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67F4FDB71F4B22D9006696ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		67F4FD8D1F4B22D8006696ED = {
+			isa = PBXGroup;
+			children = (
+				67F4FD981F4B22D8006696ED /* CKSlideMenu-OC */,
+				67F4FDB21F4B22D8006696ED /* CKSlideMenu-OCTests */,
+				67F4FDBD1F4B22D9006696ED /* CKSlideMenu-OCUITests */,
+				67F4FD971F4B22D8006696ED /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		67F4FD971F4B22D8006696ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				67F4FD961F4B22D8006696ED /* CKSlideMenu-OC.app */,
+				67F4FDAF1F4B22D8006696ED /* CKSlideMenu-OCTests.xctest */,
+				67F4FDBA1F4B22D9006696ED /* CKSlideMenu-OCUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		67F4FD981F4B22D8006696ED /* CKSlideMenu-OC */ = {
+			isa = PBXGroup;
+			children = (
+				67F4FD9C1F4B22D8006696ED /* AppDelegate.h */,
+				67F4FD9D1F4B22D8006696ED /* AppDelegate.m */,
+				67F4FDD31F4B23B2006696ED /* TableViewController.h */,
+				67F4FDD41F4B23B2006696ED /* TableViewController.m */,
+				67F4FDCC1F4B2333006696ED /* CKChildViewController.h */,
+				67F4FDCD1F4B2333006696ED /* CKChildViewController.m */,
+				67FE19631F4EB6D10066D7FC /* CkViewController.h */,
+				67FE19641F4EB6D10066D7FC /* CkViewController.m */,
+				67F4FDCF1F4B2350006696ED /* SlideMenu */,
+				67F4FDA21F4B22D8006696ED /* Main.storyboard */,
+				67F4FDA51F4B22D8006696ED /* Assets.xcassets */,
+				67F4FDA71F4B22D8006696ED /* LaunchScreen.storyboard */,
+				67F4FDAA1F4B22D8006696ED /* Info.plist */,
+				67F4FD991F4B22D8006696ED /* Supporting Files */,
+			);
+			path = "CKSlideMenu-OC";
+			sourceTree = "<group>";
+		};
+		67F4FD991F4B22D8006696ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				67F4FD9A1F4B22D8006696ED /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		67F4FDB21F4B22D8006696ED /* CKSlideMenu-OCTests */ = {
+			isa = PBXGroup;
+			children = (
+				67F4FDB31F4B22D8006696ED /* CKSlideMenu_OCTests.m */,
+				67F4FDB51F4B22D8006696ED /* Info.plist */,
+			);
+			path = "CKSlideMenu-OCTests";
+			sourceTree = "<group>";
+		};
+		67F4FDBD1F4B22D9006696ED /* CKSlideMenu-OCUITests */ = {
+			isa = PBXGroup;
+			children = (
+				67F4FDBE1F4B22D9006696ED /* CKSlideMenu_OCUITests.m */,
+				67F4FDC01F4B22D9006696ED /* Info.plist */,
+			);
+			path = "CKSlideMenu-OCUITests";
+			sourceTree = "<group>";
+		};
+		67F4FDCF1F4B2350006696ED /* SlideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				67F4FDD01F4B2362006696ED /* CKSlideMenu.h */,
+				67F4FDD11F4B2362006696ED /* CKSlideMenu.m */,
+			);
+			path = SlideMenu;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		67F4FD951F4B22D8006696ED /* CKSlideMenu-OC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67F4FDC31F4B22D9006696ED /* Build configuration list for PBXNativeTarget "CKSlideMenu-OC" */;
+			buildPhases = (
+				67F4FD921F4B22D8006696ED /* Sources */,
+				67F4FD931F4B22D8006696ED /* Frameworks */,
+				67F4FD941F4B22D8006696ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CKSlideMenu-OC";
+			productName = "CKSlideMenu-OC";
+			productReference = 67F4FD961F4B22D8006696ED /* CKSlideMenu-OC.app */;
+			productType = "com.apple.product-type.application";
+		};
+		67F4FDAE1F4B22D8006696ED /* CKSlideMenu-OCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67F4FDC61F4B22D9006696ED /* Build configuration list for PBXNativeTarget "CKSlideMenu-OCTests" */;
+			buildPhases = (
+				67F4FDAB1F4B22D8006696ED /* Sources */,
+				67F4FDAC1F4B22D8006696ED /* Frameworks */,
+				67F4FDAD1F4B22D8006696ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				67F4FDB11F4B22D8006696ED /* PBXTargetDependency */,
+			);
+			name = "CKSlideMenu-OCTests";
+			productName = "CKSlideMenu-OCTests";
+			productReference = 67F4FDAF1F4B22D8006696ED /* CKSlideMenu-OCTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		67F4FDB91F4B22D9006696ED /* CKSlideMenu-OCUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67F4FDC91F4B22D9006696ED /* Build configuration list for PBXNativeTarget "CKSlideMenu-OCUITests" */;
+			buildPhases = (
+				67F4FDB61F4B22D9006696ED /* Sources */,
+				67F4FDB71F4B22D9006696ED /* Frameworks */,
+				67F4FDB81F4B22D9006696ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				67F4FDBC1F4B22D9006696ED /* PBXTargetDependency */,
+			);
+			name = "CKSlideMenu-OCUITests";
+			productName = "CKSlideMenu-OCUITests";
+			productReference = 67F4FDBA1F4B22D9006696ED /* CKSlideMenu-OCUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		67F4FD8E1F4B22D8006696ED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = caike;
+				TargetAttributes = {
+					67F4FD951F4B22D8006696ED = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = L855ZMKEYR;
+						ProvisioningStyle = Automatic;
+					};
+					67F4FDAE1F4B22D8006696ED = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = L855ZMKEYR;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 67F4FD951F4B22D8006696ED;
+					};
+					67F4FDB91F4B22D9006696ED = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = L855ZMKEYR;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 67F4FD951F4B22D8006696ED;
+					};
+				};
+			};
+			buildConfigurationList = 67F4FD911F4B22D8006696ED /* Build configuration list for PBXProject "CKSlideMenu-OC" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 67F4FD8D1F4B22D8006696ED;
+			productRefGroup = 67F4FD971F4B22D8006696ED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				67F4FD951F4B22D8006696ED /* CKSlideMenu-OC */,
+				67F4FDAE1F4B22D8006696ED /* CKSlideMenu-OCTests */,
+				67F4FDB91F4B22D9006696ED /* CKSlideMenu-OCUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		67F4FD941F4B22D8006696ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67F4FDA91F4B22D8006696ED /* LaunchScreen.storyboard in Resources */,
+				67F4FDA61F4B22D8006696ED /* Assets.xcassets in Resources */,
+				67F4FDA41F4B22D8006696ED /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67F4FDAD1F4B22D8006696ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67F4FDB81F4B22D9006696ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		67F4FD921F4B22D8006696ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67F4FDD51F4B23B2006696ED /* TableViewController.m in Sources */,
+				67F4FDD21F4B2362006696ED /* CKSlideMenu.m in Sources */,
+				67FE19651F4EB6D10066D7FC /* CkViewController.m in Sources */,
+				67F4FD9E1F4B22D8006696ED /* AppDelegate.m in Sources */,
+				67F4FD9B1F4B22D8006696ED /* main.m in Sources */,
+				67F4FDCE1F4B2333006696ED /* CKChildViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67F4FDAB1F4B22D8006696ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67F4FDB41F4B22D8006696ED /* CKSlideMenu_OCTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67F4FDB61F4B22D9006696ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67F4FDBF1F4B22D9006696ED /* CKSlideMenu_OCUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		67F4FDB11F4B22D8006696ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 67F4FD951F4B22D8006696ED /* CKSlideMenu-OC */;
+			targetProxy = 67F4FDB01F4B22D8006696ED /* PBXContainerItemProxy */;
+		};
+		67F4FDBC1F4B22D9006696ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 67F4FD951F4B22D8006696ED /* CKSlideMenu-OC */;
+			targetProxy = 67F4FDBB1F4B22D9006696ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		67F4FDA21F4B22D8006696ED /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				67F4FDA31F4B22D8006696ED /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		67F4FDA71F4B22D8006696ED /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				67F4FDA81F4B22D8006696ED /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		67F4FDC11F4B22D9006696ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		67F4FDC21F4B22D9006696ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		67F4FDC41F4B22D9006696ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = L855ZMKEYR;
+				INFOPLIST_FILE = "CKSlideMenu-OC/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.caidake.CKSlideMenu-OC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		67F4FDC51F4B22D9006696ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = L855ZMKEYR;
+				INFOPLIST_FILE = "CKSlideMenu-OC/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.caidake.CKSlideMenu-OC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		67F4FDC71F4B22D9006696ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = L855ZMKEYR;
+				INFOPLIST_FILE = "CKSlideMenu-OCTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.caidake.CKSlideMenu-OCTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CKSlideMenu-OC.app/CKSlideMenu-OC";
+			};
+			name = Debug;
+		};
+		67F4FDC81F4B22D9006696ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = L855ZMKEYR;
+				INFOPLIST_FILE = "CKSlideMenu-OCTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.caidake.CKSlideMenu-OCTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CKSlideMenu-OC.app/CKSlideMenu-OC";
+			};
+			name = Release;
+		};
+		67F4FDCA1F4B22D9006696ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = L855ZMKEYR;
+				INFOPLIST_FILE = "CKSlideMenu-OCUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.caidake.CKSlideMenu-OCUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "CKSlideMenu-OC";
+			};
+			name = Debug;
+		};
+		67F4FDCB1F4B22D9006696ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = L855ZMKEYR;
+				INFOPLIST_FILE = "CKSlideMenu-OCUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.caidake.CKSlideMenu-OCUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "CKSlideMenu-OC";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		67F4FD911F4B22D8006696ED /* Build configuration list for PBXProject "CKSlideMenu-OC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67F4FDC11F4B22D9006696ED /* Debug */,
+				67F4FDC21F4B22D9006696ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		67F4FDC31F4B22D9006696ED /* Build configuration list for PBXNativeTarget "CKSlideMenu-OC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67F4FDC41F4B22D9006696ED /* Debug */,
+				67F4FDC51F4B22D9006696ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		67F4FDC61F4B22D9006696ED /* Build configuration list for PBXNativeTarget "CKSlideMenu-OCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67F4FDC71F4B22D9006696ED /* Debug */,
+				67F4FDC81F4B22D9006696ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		67F4FDC91F4B22D9006696ED /* Build configuration list for PBXNativeTarget "CKSlideMenu-OCUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67F4FDCA1F4B22D9006696ED /* Debug */,
+				67F4FDCB1F4B22D9006696ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 67F4FD8E1F4B22D8006696ED /* Project object */;
+}
