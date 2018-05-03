@@ -16,8 +16,9 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CKSlideMenu"
-  s.version      = "0.0.1"
+  s.version      = "1.0.0"
   s.summary      = "A SlideMenu for iOS"
+  s.swift_version = "3.2"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
