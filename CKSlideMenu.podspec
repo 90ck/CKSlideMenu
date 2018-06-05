@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CKSlideMenu"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "A SlideMenu for iOS"
   s.swift_version = "3.2"
 
