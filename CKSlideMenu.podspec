@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CKSlideMenu"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A SlideMenu for iOS"
   s.swift_version = "3.2"
 
@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "CKSlideMenu/SlideMenu"
+  s.source_files  = "SlideMenu"
   s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
